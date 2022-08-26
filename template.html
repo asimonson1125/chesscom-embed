@@ -1,0 +1,35 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="bs.css" media="screen" />
+    <script src="chessEmbed.js"></script>
+</head>
+
+<template id="chessProfileTemplate">
+    <div class="chessProfile">
+        <div class="identity">
+            <img class="pfp" />
+            <h5 class="chessName"></h5>
+        </div>
+        <div class="vContainer">
+            <div class="vItem">
+                <div class="chessIcon rapid">Ἓ</div><p>1500</p>
+            </div>
+            <div class="vItem">
+                <div class="chessIcon blitz">Ἔ</div><p>1500</p>
+            </div>
+            <div class="vItem">
+               <div class="chessIcon bullet">Ἕ</div><p>1500</p>
+            </div>
+            <div class="vItem">
+                <div class="chessIcon puzzles">ἕ</div><p>1500</p>
+            </div>
+        </div>
+    </div>
+</template>
+<!-- 
+    Sample
+ -->
+
+<div id="container"></div>
+<script>
+    addChessEmbed('asimonson1125', document.querySelector('#container'));
+</script>

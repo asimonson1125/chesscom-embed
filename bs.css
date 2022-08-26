@@ -1,0 +1,68 @@
+@font-face {
+    font-family: Chess New;
+    src: url('https://www.chess.com/bundles/web/fonts/chessglyph-new.0cc8115c.woff2');
+}
+
+.chessProfile {
+    background: #222222;
+    border-radius: 5px;
+    width: 300px;
+    height: 125px;
+    color: #AAAAAA;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.chessProfile > div {
+    border:solid black 3px;
+}
+
+.identity h5 {
+    margin: 0px;
+}
+
+.pfp {
+    border-radius: 50%;
+    width: 75px;
+    text-align: center;
+}
+
+.vContainer {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.vItem {
+    display: inline-block;
+}
+
+.vItem p {
+    margin: 0px;
+    display: inline;
+}
+
+.chessIcon {
+    display: inline-block;
+    font-family: Chess New;
+    font-size: x-large;
+    width: 25px;
+    text-align: center;
+}
+
+.rapid {
+    color: #6c9d41;
+}
+
+.blitz {
+    color: #f7c045;
+}
+
+.bullet {
+    color: #a58a45;
+}
+
+.puzzles {
+    color: #db7e3b;
+}
