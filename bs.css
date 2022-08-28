@@ -3,18 +3,28 @@
     src: url('https://www.chess.com/bundles/web/fonts/chessglyph-new.0cc8115c.woff2');
 }
 
-.chessProfile {
-    background: #222222;
+body{
+    margin: 0px;
+}
+
+#chessProfile {
+    background: black;
+    background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .75)), url('/diamonds-light.png');
     border-radius: 5px;
     width: 300px;
-    height: 125px;
+    height: calc(125px + 2em);
     color: #AAAAAA;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-.chessProfile > div {
-    border:solid black 3px;
+.chessInfo {
+    background-color: #555555;
+    margin: 1em;
+}
+
+.identity {
+    margin-right: 0px;
 }
 
 .identity h5 {

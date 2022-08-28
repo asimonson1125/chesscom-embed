@@ -1,0 +1,29 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="bs.css" media="screen" />
+    <script src="chessEmbed.js"></script>
+</head>
+<div id="chessProfile">
+    <div class="identity chessInfo">
+        <img class="pfp" src='default.svg'/>
+        <h5 class="chessName">Loading</h5>
+    </div>
+    <!-- <div class="spacer"></div> -->
+    <div class="vContainer chessInfo">
+        <div class="vItem">
+            <div class="chessIcon rapid">Ἓ</div><p>Loading</p>
+        </div>
+        <div class="vItem">
+            <div class="chessIcon blitz">Ἔ</div><p>Loading</p>
+        </div>
+        <div class="vItem">
+           <div class="chessIcon bullet">Ἕ</div><p>Loading</p>
+        </div>
+        <div class="vItem">
+            <div class="chessIcon puzzles">ἕ</div><p>Loading</p>
+        </div>
+    </div>
+</div>
+<script>
+    const username = window.location.href.substring(window.location.href.indexOf('username=') + 9);
+    addChessEmbed(username);
+</script>
