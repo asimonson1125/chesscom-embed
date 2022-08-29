@@ -2,9 +2,9 @@
     <link rel="stylesheet" type="text/css" href="bs.css" media="screen" />
     <script src="chessEmbed.js"></script>
 </head>
-<div id="chessProfile">
+<div id="chessProfile" onclick="seeAccount(username)">
     <div class="identity chessInfo">
-        <img class="pfp" src='default.svg'/>
+        <div class="pfpContainer"><div><img class="pfp" src='default.svg'/></div></div>
         <h5 class="chessName">Loading</h5>
     </div>
     <!-- <div class="spacer"></div> -->
@@ -22,8 +22,12 @@
             <div class="chessIcon puzzles">ἕ</div><p>Loading</p>
         </div>
     </div>
+    <script>
+        const username = window.location.href.substring(window.location.href.indexOf('username=') + 9);
+        addChessEmbed(username);
+    
+        function seeAccount(username){
+            window.top.location.href = "https://chess.com/member/" + username;
+        }
+    </script>
 </div>
-<script>
-    const username = window.location.href.substring(window.location.href.indexOf('username=') + 9);
-    addChessEmbed(username);
-</script>

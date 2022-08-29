@@ -3,7 +3,7 @@
     src: url('https://www.chess.com/bundles/web/fonts/chessglyph-new.0cc8115c.woff2');
 }
 
-body{
+body {
     margin: 0px;
 }
 
@@ -16,10 +16,11 @@ body{
     color: #AAAAAA;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    cursor: pointer;
 }
 
 .chessInfo {
-    background-color: #555555;
+    background-color: rgba(0,0,0,.3);;
     margin: 1em;
 }
 
@@ -29,11 +30,30 @@ body{
 
 .identity h5 {
     margin: 0px;
+    margin-top: -25px;
+    background: black;
+    z-index: 50;
+    position: relative;
+    width: 90%;
+    margin-left: 10px;
+
+}
+
+.pfpContainer {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.pfpContainer > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .pfp {
     border-radius: 50%;
-    width: 75px;
+    width: 100px;
     text-align: center;
 }
 
