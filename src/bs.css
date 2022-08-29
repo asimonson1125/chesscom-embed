@@ -9,7 +9,7 @@ body {
 
 #chessProfile {
     background: black;
-    background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .75)), url('/diamonds-light.png');
+    background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .75)), url('/src/diamonds-light.png');
     border-radius: 5px;
     width: 300px;
     height: calc(125px + 2em);
