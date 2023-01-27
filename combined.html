@@ -1,0 +1,232 @@
+<style>
+  @font-face {
+    font-family: Chess New;
+    src: url("https://www.chess.com/bundles/web/fonts/chessglyph-new.0cc8115c.woff2");
+  }
+
+  .diamonds {
+    background: black;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75)),
+      url("../chesscom-embed/diamonds.png");
+  }
+
+  .chess {
+    width: 300px;
+    border: none;
+    /* transform: scale(.8);
+      float: right; */
+  }
+
+  #chessProfile {
+    border-radius: 5px;
+    width: 300px;
+    height: calc(125px + 2em);
+    color: #aaaaaa;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    cursor: pointer;
+  }
+
+  .chessInfo {
+    background-color: rgba(0, 0, 0, 0.3);
+    margin: 1em;
+  }
+
+  .chessRapid::after,
+  .chessBlitz::after,
+  .chessBullet::after,
+  .chessPuzzles::after {
+    font-size: xx-small;
+    float: right;
+    margin-right: 5px;
+    margin-top: 1rem;
+  }
+
+  .chessStat {
+    display: inline;
+    vertical-align: center;
+  }
+
+  .chessStat::after {
+    font-size: xx-small;
+    float: right;
+  }
+
+  .chessPuzzles::after {
+    content: "Tactics";
+  }
+
+  .chessBullet::after {
+    content: "Bullet";
+  }
+
+  .chessBlitz::after {
+    content: "Blitz";
+  }
+
+  .chessRapid::after {
+    content: "Rapid";
+  }
+
+  .bottomtext {
+    font-size: x-small;
+    margin: 3px;
+    color: white;
+    text-align: right;
+  }
+
+  .black {
+    background-color: black;
+  }
+
+  .identity {
+    margin-right: 0px;
+  }
+
+  .identity h5 {
+    margin: 0px;
+    margin-top: -25px;
+    background: black;
+    z-index: 50;
+    position: relative;
+    width: 90%;
+    margin-left: 10px;
+  }
+
+  .pfpContainer {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .pfpContainer > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .pfp {
+    border-radius: 50%;
+    width: 100px;
+    text-align: center;
+  }
+
+  .vContainer {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    max-width: 100%;
+    justify-content: space-around;
+  }
+
+  .chessIcon {
+    display: inline-block;
+    font-family: Chess New;
+    font-size: x-large;
+    width: 25px;
+    text-align: center;
+  }
+
+  .rapid {
+    color: #6c9d41;
+  }
+
+  .blitz {
+    color: #f7c045;
+  }
+
+  .bullet {
+    color: #a58a45;
+  }
+
+  .puzzles {
+    color: #db7e3b;
+  }
+</style>
+<div class="chess">
+  <div class="black">
+    <div
+      id="chessProfile"
+      class="diamonds"
+      onClick="window.top.location.href = 'https://chess.com/member/{{ username }}'"
+    >
+      <div class="identity chessInfo">
+        <div class="pfpContainer">
+          <div>
+            <img class="pfp chessImage" src='{{ url_for('static',
+            filename='chesscom-embed/default.svg') }}' alt={{ username }} />
+          </div>
+        </div>
+        <h5 class="chessName">Loading...</h5>
+      </div>
+      <div class="vContainer chessInfo">
+        <div class="vItem chessRapid">
+          <div class="chessIcon rapid">Ἓ</div>
+          <div class="chessStat"></div>
+        </div>
+        <div class="vItem chessBlitz">
+          <div class="chessIcon blitz">Ἔ</div>
+          <div class="chessStat"></div>
+        </div>
+        <div class="vItem chessBullet">
+          <div class="chessIcon bullet">Ἕ</div>
+          <div class="chessStat"></div>
+        </div>
+        <div class="vItem chessPuzzles">
+          <div class="chessIcon puzzles">ἕ</div>
+          <div class="chessStat"></div>
+        </div>
+      </div>
+    </div>
+    <div class="bottomtext">Chess.com Stat Embed by Andrew Simonson</div>
+  </div>
+</div>
+<script>
+  async function addChessEmbed(username) {
+    let user, stats;
+    try {
+      user = await fetch(`https://api.chess.com/pub/player/${username}`);
+      stats = await fetch(`https://api.chess.com/pub/player/${username}/stats`);
+    } catch (e) {
+      setChess({ cName: "Chess.com request failed" });
+      return;
+    }
+    if (user.status === 200) {
+      user = await user.json();
+      stats = await stats.json();
+      ratings = {
+        rapid: stats.chess_rapid.last.rating,
+        blitz: stats.chess_blitz.last.rating,
+        bullet: stats.chess_bullet.last.rating,
+        tactics: stats.tactics.highest.rating,
+      };
+      setChess({ cName: user["username"], pic: user.avatar, ratings: ratings });
+    } else if (user === null || user.status === 403 || user.status === null) {
+      chessSet({ cName: "Chess.com request failed" });
+    } else {
+      chessSet({ cName: "User Not Found" });
+    }
+  }
+
+  function setChess({ cName = null, pic = null, ratings = null }) {
+    if (cName) {
+      document.querySelector(".chessName").textContent = cName;
+    }
+    if (pic) {
+      document.querySelector(".chessImage").src = pic;
+    }
+    if (ratings) {
+      document.querySelector(".chessRapid .chessStat").textContent =
+        ratings.rapid;
+      document.querySelector(".chessBlitz .chessStat").textContent =
+        ratings.blitz;
+      document.querySelector(".chessBullet .chessStat").textContent =
+        ratings.bullet;
+      document.querySelector(".chessPuzzles .chessStat").textContent =
+        ratings.tactics;
+    }
+  }
+</script>
+<script>
+  addChessEmbed("asimonson1125");
+</script>
